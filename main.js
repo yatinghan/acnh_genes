@@ -128,6 +128,7 @@ function fillBuckets3(d, whiten, yellown, redn) {
     return cnt;
 }
 
+
 function fillBuckets4(d, whiten, yellown, redn, opacityn) {
     var cnt = 0;
     for (var i = 0; i < whiten.length; i++) {
@@ -147,36 +148,70 @@ function fillBuckets4(d, whiten, yellown, redn, opacityn) {
 
 // remove all entries in table and insert results in dictionary d
 // cnt: sum of frequencies
-function injectTable(table, d, cnt, color_map, type) {
+function injectTable(table, d, cnt, color_map, type, coloronly) {
     while(table.rows.length > 0) {
         table.deleteRow(0);
     }
 
-    for (var key in d){
-        var l = unpack(key);
-        r = l[0]; y = l[1]; w = l[2]; 
-        var t = r.toString() + "/" + y.toString() + "/" + w.toString();
-        
-        // insert a new row to the table
-        var newrow = table.insertRow(-1);
+    if (coloronly) {
+        // merge colors
+        cd = {}
+        for (var key in d){
+            var color = color_map[key];
+            if (cd[color]) cd[color] += d[key];
+            else cd[color] = d[key];
+        }
 
-        // insert color
-        var color = color_map[key];
-        var img = document.createElement('img');
-        img.src = "images/" + type + "_" + color_map[key] + ".png";
-        img.alt = color;
-        var newcell = newrow.insertCell();
-        newcell.appendChild(img);
+        for (var key in cd) {
+            // insert a new row to the table
+            var newrow = table.insertRow(-1);
 
-        // insert gene type
-        var gene  = document.createTextNode(t);
-        newcell = newrow.insertCell();
-        newcell.appendChild(gene);
+            // insert color
+            var color = key;
+            var img = document.createElement('img');
+            img.src = "images/" + type + "_" + color + ".png";
+            img.alt = color;
+            var newcell = newrow.insertCell();
+            newcell.appendChild(img);
 
-        // insert breeding chances
-        var chance  = document.createTextNode((d[key]/cnt*100) + "%");
-        newcell = newrow.insertCell();
-        newcell.appendChild(chance);
+            // insert gene type
+            var gene  = document.createTextNode("-");
+            newcell = newrow.insertCell();
+            newcell.appendChild(gene);
+
+            // insert breeding chances
+            var chance  = document.createTextNode((cd[key]/cnt*100) + "%");
+            newcell = newrow.insertCell();
+            newcell.appendChild(chance);
+        }
+    }
+    else {
+        for (var key in d){
+            var l = unpack(key);
+            r = l[0]; y = l[1]; w = l[2]; 
+            var t = r.toString() + "/" + y.toString() + "/" + w.toString();
+            
+            // insert a new row to the table
+            var newrow = table.insertRow(-1);
+
+            // insert color
+            var color = color_map[key];
+            var img = document.createElement('img');
+            img.src = "images/" + type + "_" + color_map[key] + ".png";
+            img.alt = color;
+            var newcell = newrow.insertCell();
+            newcell.appendChild(img);
+
+            // insert gene type
+            var gene  = document.createTextNode(t);
+            newcell = newrow.insertCell();
+            newcell.appendChild(gene);
+
+            // insert breeding chances
+            var chance  = document.createTextNode((d[key]/cnt*100) + "%");
+            newcell = newrow.insertCell();
+            newcell.appendChild(chance);
+        }
     }
 }
 
@@ -262,6 +297,8 @@ function calculateTulips() {
     var white1 = Number(e.options[e.selectedIndex].value);
     e = document.getElementById("tulipWhite2");
     var white2 = Number(e.options[e.selectedIndex].value);   
+    e = document.getElementById("tulipColorOnly");
+    var coloronly = e.checked; 
 
     var gene1 = pack(red1, yellow1, white1);
     var gene2 = pack(red2, yellow2, white2);
@@ -269,11 +306,10 @@ function calculateTulips() {
     var whiten = shufflePair(gene1 & 3, gene2 & 3);
     var yellown = shufflePair((gene1 >> 2) & 3, (gene2 >> 2) & 3);
     var redn = shufflePair((gene1 >> 4) & 3, (gene2 >> 4) & 3);
-
     var d = {};
     var cnt = fillBuckets3(d, whiten, yellown, redn);
     var table = document.getElementById("table_tulip").getElementsByTagName('tbody')[0];
-    injectTable(table, d, cnt, tulip_dict, "tulip");
+    injectTable(table, d, cnt, tulip_dict, "tulip", coloronly);
     
     return false;
 }
