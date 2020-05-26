@@ -112,6 +112,31 @@ function pack(r, y, w) {
     return ((r << 4) | (y << 2) | w);
 }
 
+function unpack(g) {
+    var r = g >> 4 & 3;
+    var y = g >> 2 & 3;
+    var w = g & 3;
+    r = (r == 3) ? 2 : r;
+    y = (y == 3) ? 2 : y;
+    w = (w == 3) ? 2 : w;
+    return [r, y, w];
+}
+
+function fillBuckets3(d, whiten, yellown, redn) {
+    var cnt = 0;
+    for (var i = 0; i < whiten.length; i++) {
+        for (var j = 0; j < yellown.length; j++) {
+            for (var k = 0; k < redn.length; k++) {
+                cnt++;
+                var g = pack(redn[k], yellown[j], whiten[i]);
+                if (d[g]) d[g] += 1;
+                else d[g] = 1;
+            }
+        }
+    }
+    return cnt;
+}
+
 // pair1, pair2 : one of 0b00, 0b01, 0b11
 function shufflePair(pair1, pair2) {
 
@@ -131,7 +156,6 @@ function shufflePair(pair1, pair2) {
     
     return [c1, c2, c3, c4];
 }
-
 
 function calculateTulips() {
     var e = document.getElementById("tulipRed1");
@@ -153,35 +177,27 @@ function calculateTulips() {
     var whiten = shufflePair(gene1 & 3, gene2 & 3);
     var yellown = shufflePair((gene1 >> 2) & 3, (gene2 >> 2) & 3);
     var redn = shufflePair((gene1 >> 4) & 3, (gene2 >> 4) & 3);
+    var d = {};
+    var cnt = fillBuckets3(d, whiten, yellown, redn);
 
-    var cnt = 0;
-    var d = {}
-    for (var i = 0; i < whiten.length; i++) {
-        for (var j = 0; j < yellown.length; j++) {
-            for (var k = 0; k < redn.length; k++) {
-                cnt++;
-                var g = pack(redn[k], yellown[j], whiten[i]);
-                if (d[g]) d[g] += 1;
-                else d[g] = 1;
-            }
-        }
+
+    var table = document.getElementById("table_tulip").getElementsByTagName('tbody')[0];
+    
+    while(table.rows.length > 0) {
+        table.deleteRow(0);
     }
 
-    var table = document.getElementById("table_tulip");
     for (var key in d){
-        var r = key >> 4 & 3;
-        var y = key >> 2 & 3;
-        var w = key & 3;
-        r = (r == 3) ? 2 : r;
-        y = (y == 3) ? 2 : y;
-        w = (w == 3) ? 2 : w;
+        var l = unpack(key);
+        r = l[0]; y = l[1]; w = l[2]; 
         var t = r.toString() + "/" + y.toString() + "/" + w.toString();
-        console.log(t, tulip_dict[key], (d[key]/cnt*100) + "%");
-        var newrow = table.insertRow();
+        //console.log(t, tulip_dict[key], (d[key]/cnt*100) + "%");
+        
+        var newrow = table.insertRow(-1);
         var gene  = document.createTextNode(t);
         var color = document.createTextNode(tulip_dict[key]);
         var chance  = document.createTextNode((d[key]/cnt*100) + "%");
-        
+
         var newcell = newrow.insertCell();
         newcell.appendChild(color);
         newcell = newrow.insertCell();
