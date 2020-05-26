@@ -215,36 +215,70 @@ function injectTable(table, d, cnt, color_map, type, coloronly) {
     }
 }
 
-function injectTable4(table, d, cnt, color_map, type) {
+function injectTable4(table, d, cnt, color_map, type, coloronly) {
     while(table.rows.length > 0) {
         table.deleteRow(0);
     }
 
-    for (var key in d){
-        var l = unpack4(key);
-        a = l[0]; r = l[1]; y = l[2]; w = l[3]; 
-        var t = a.toString() + "/" + r.toString() + "/" + y.toString() + "/" + w.toString();
-        
-        // insert a new row to the table
-        var newrow = table.insertRow(-1);
+    if (coloronly) {
+        // merge colors
+        cd = {}
+        for (var key in d){
+            var color = color_map[key];
+            if (cd[color]) cd[color] += d[key];
+            else cd[color] = d[key];
+        }
 
-        // insert color
-        var color = color_map[key];
-        var img = document.createElement('img');
-        img.src = "images/" + type + "_" + color_map[key] + ".png";
-        img.alt = color;
-        var newcell = newrow.insertCell();
-        newcell.appendChild(img);
+        for (var key in cd) {
+            // insert a new row to the table
+            var newrow = table.insertRow(-1);
 
-        // insert gene type
-        var gene  = document.createTextNode(t);
-        newcell = newrow.insertCell();
-        newcell.appendChild(gene);
+            // insert color
+            var color = key;
+            var img = document.createElement('img');
+            img.src = "images/" + type + "_" + color + ".png";
+            img.alt = color;
+            var newcell = newrow.insertCell();
+            newcell.appendChild(img);
 
-        // insert breeding chances
-        var chance  = document.createTextNode((d[key]/cnt*100) + "%");
-        newcell = newrow.insertCell();
-        newcell.appendChild(chance);
+            // insert gene type
+            var gene  = document.createTextNode("-");
+            newcell = newrow.insertCell();
+            newcell.appendChild(gene);
+
+            // insert breeding chances
+            var chance  = document.createTextNode((cd[key]/cnt*100) + "%");
+            newcell = newrow.insertCell();
+            newcell.appendChild(chance);
+        }
+    }
+    else {
+        for (var key in d){
+            var l = unpack4(key);
+            a = l[0]; r = l[1]; y = l[2]; w = l[3]; 
+            var t = a.toString() + "/" + r.toString() + "/" + y.toString() + "/" + w.toString();
+            
+            // insert a new row to the table
+            var newrow = table.insertRow(-1);
+
+            // insert color
+            var color = color_map[key];
+            var img = document.createElement('img');
+            img.src = "images/" + type + "_" + color_map[key] + ".png";
+            img.alt = color;
+            var newcell = newrow.insertCell();
+            newcell.appendChild(img);
+
+            // insert gene type
+            var gene  = document.createTextNode(t);
+            newcell = newrow.insertCell();
+            newcell.appendChild(gene);
+
+            // insert breeding chances
+            var chance  = document.createTextNode((d[key]/cnt*100) + "%");
+            newcell = newrow.insertCell();
+            newcell.appendChild(chance);
+        }
     }
 }
 
@@ -267,6 +301,8 @@ function calculateRoses() {
     var opacity1 = Number(e.options[e.selectedIndex].value);
     e = document.getElementById("roseOpacity2");
     var opacity2 = Number(e.options[e.selectedIndex].value);   
+    e = document.getElementById("roseColorOnly");
+    var coloronly = e.checked; 
 
     var gene1 = pack4(opacity1, red1, yellow1, white1);
     var gene2 = pack4(opacity2, red2, yellow2, white2);
@@ -279,7 +315,7 @@ function calculateRoses() {
     var d = {};
     var cnt = fillBuckets4(d, whiten, yellown, redn, opacityn);
     var table = document.getElementById("table_rose").getElementsByTagName('tbody')[0];
-    injectTable4(table, d, cnt, rose_dict, "rose");
+    injectTable4(table, d, cnt, rose_dict, "rose", coloronly);
     
     return false;
 }
@@ -327,6 +363,8 @@ function calculatePansies() {
     var white1 = Number(e.options[e.selectedIndex].value);
     e = document.getElementById("pansyWhite2");
     var white2 = Number(e.options[e.selectedIndex].value);   
+    e = document.getElementById("pansyColorOnly");
+    var coloronly = e.checked; 
 
     var gene1 = pack(red1, yellow1, white1);
     var gene2 = pack(red2, yellow2, white2);
@@ -338,7 +376,7 @@ function calculatePansies() {
     var d = {};
     var cnt = fillBuckets3(d, whiten, yellown, redn);
     var table = document.getElementById("table_pansy").getElementsByTagName('tbody')[0];
-    injectTable(table, d, cnt, pansy_dict, "pansy");
+    injectTable(table, d, cnt, pansy_dict, "pansy", coloronly);
     
     return false;
 }
@@ -356,6 +394,8 @@ function calculateCosmoses() {
     var white1 = Number(e.options[e.selectedIndex].value);
     e = document.getElementById("cosmosWhite2");
     var white2 = Number(e.options[e.selectedIndex].value);   
+    e = document.getElementById("cosmosColorOnly");
+    var coloronly = e.checked; 
 
     var gene1 = pack(red1, yellow1, white1);
     var gene2 = pack(red2, yellow2, white2);
@@ -367,7 +407,7 @@ function calculateCosmoses() {
     var d = {};
     var cnt = fillBuckets3(d, whiten, yellown, redn);
     var table = document.getElementById("table_cosmos").getElementsByTagName('tbody')[0];
-    injectTable(table, d, cnt, cosmos_dict, "cosmos");
+    injectTable(table, d, cnt, cosmos_dict, "cosmos", coloronly);
     
     return false;
 }
@@ -385,6 +425,8 @@ function calculateLilies() {
     var white1 = Number(e.options[e.selectedIndex].value);
     e = document.getElementById("lilyWhite2");
     var white2 = Number(e.options[e.selectedIndex].value);   
+    e = document.getElementById("lilyColorOnly");
+    var coloronly = e.checked; 
 
     var gene1 = pack(red1, yellow1, white1);
     var gene2 = pack(red2, yellow2, white2);
@@ -396,7 +438,7 @@ function calculateLilies() {
     var d = {};
     var cnt = fillBuckets3(d, whiten, yellown, redn);
     var table = document.getElementById("table_lily").getElementsByTagName('tbody')[0];
-    injectTable(table, d, cnt, lily_dict, "lily");
+    injectTable(table, d, cnt, lily_dict, "lily", coloronly);
     
     return false;
 }
@@ -414,6 +456,8 @@ function calculateHyacinths() {
     var white1 = Number(e.options[e.selectedIndex].value);
     e = document.getElementById("hyacinthWhite2");
     var white2 = Number(e.options[e.selectedIndex].value);   
+    e = document.getElementById("hyacinthColorOnly");
+    var coloronly = e.checked; 
 
     var gene1 = pack(red1, yellow1, white1);
     var gene2 = pack(red2, yellow2, white2);
@@ -425,7 +469,7 @@ function calculateHyacinths() {
     var d = {};
     var cnt = fillBuckets3(d, whiten, yellown, redn);
     var table = document.getElementById("table_hyacinth").getElementsByTagName('tbody')[0];
-    injectTable(table, d, cnt, hyacinth_dict, "hyacinth");
+    injectTable(table, d, cnt, hyacinth_dict, "hyacinth", coloronly);
     
     return false;
 }
@@ -443,6 +487,8 @@ function calculateWindflowers() {
     var white1 = Number(e.options[e.selectedIndex].value);
     e = document.getElementById("windflowerWhite2");
     var white2 = Number(e.options[e.selectedIndex].value);   
+    e = document.getElementById("windflowerColorOnly");
+    var coloronly = e.checked; 
 
     var gene1 = pack(red1, yellow1, white1);
     var gene2 = pack(red2, yellow2, white2);
@@ -454,7 +500,7 @@ function calculateWindflowers() {
     var d = {};
     var cnt = fillBuckets3(d, whiten, yellown, redn);
     var table = document.getElementById("table_windflower").getElementsByTagName('tbody')[0];
-    injectTable(table, d, cnt, windflower_dict, "windflower");
+    injectTable(table, d, cnt, windflower_dict, "windflower", coloronly);
     
     return false;
 }
@@ -472,6 +518,8 @@ function calculateMums() {
     var white1 = Number(e.options[e.selectedIndex].value);
     e = document.getElementById("mumWhite2");
     var white2 = Number(e.options[e.selectedIndex].value);   
+    e = document.getElementById("mumColorOnly");
+    var coloronly = e.checked; 
 
     var gene1 = pack(red1, yellow1, white1);
     var gene2 = pack(red2, yellow2, white2);
@@ -483,7 +531,7 @@ function calculateMums() {
     var d = {};
     var cnt = fillBuckets3(d, whiten, yellown, redn);
     var table = document.getElementById("table_mum").getElementsByTagName('tbody')[0];
-    injectTable(table, d, cnt, mum_dict, "mum");
+    injectTable(table, d, cnt, mum_dict, "mum", coloronly);
     
     return false;
 }
