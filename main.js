@@ -796,3 +796,41 @@ var windflower_dict = {
     0b111101: "pink",
     0b111111: "purple"
 }
+
+var mum_dict = {
+    0b000000: "white",
+    0b000001: "white",
+    0b000011: "purple",
+    
+    0b000100: "yellow",
+    0b000101: "yellow",
+    0b000111: "white",
+
+    0b001100: "yellow",
+    0b001101: "yellow",
+    0b001111: "yellow",
+
+    0b010000: "pink",
+    0b010001: "pink",
+    0b010011: "pink",
+
+    0b010100: "yellow",
+    0b010101: "red",
+    0b010111: "pink",
+
+    0b011100: "purple",
+    0b011101: "purple",
+    0b011111: "purple",
+
+    0b110000: "red",
+    0b110001: "red",
+    0b110011: "red",
+
+    0b110100: "purple",
+    0b110101: "purple",
+    0b110111: "red",
+
+    0b111100: "green",
+    0b111101: "green",
+    0b111111: "red"
+}
