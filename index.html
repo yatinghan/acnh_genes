@@ -13,7 +13,7 @@
         <h1>ACNH Breeding Chances Calculator</h1>
         <p>Reference: <a href="https://aiterusawato.github.io/satogu/acnh/flowers/genotypes.html">Satogu's ACNH Flower Guide</a> </p>
         <p>中文版（并没有）: <a href="ch.html">点击这里</a> </p>
-        <p>Update: tulip working in the console. Press F12 and see console output. </p>
+        <p>Update: Tulip prediction is working. </p>
         <div class="btn-group" style="display: flex" role="group" aria-label="flower selection">
             <button onclick="selectFlower('rose')" type="button" class="btn btn-secondary">Rose</button>
             <button onclick="selectFlower('tulip')" type="button" class="btn btn-secondary">Tulip</button>
@@ -25,138 +25,10 @@
             <button onclick="selectFlower('mum')" type="button" class="btn btn-secondary">Mum</button>
         </div>
         
-        <div id="table_rose" class="d-block">
-            <form>
-                <div class="form-row">
-                    <div class="col-sm-1"><p>Parent 1</p></div>
-                    <div class="col-sm-3">
-                        <select id="roseRed1" class="form-control">
-                          <option value="" disabled selected>Red</option>
-                          <option>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3">
-                        <select id="roseYellow1" class="form-control">
-                          <option value="" disabled selected>Yellow</option>
-                          <option >0</option>
-                          <option>1</option>
-                          <option>2</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3">
-                        <select id="roseWhite1" class="form-control">
-                          <option value="" disabled selected>White</option>
-                          <option>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="col-sm-1"><p>Parent 2</p></div>
-                    <div class="col-sm-3">
-                        <select id="roseRed2" class="form-control">
-                          <option value="" disabled selected>Red</option>
-                          <option>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3">
-                        <select id="roseYellow2" class="form-control">
-                          <option value="" disabled selected>Yellow</option>
-                          <option >0</option>
-                          <option>1</option>
-                          <option>2</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3">
-                        <select id="roseWhite2" class="form-control">
-                          <option value="" disabled selected>White</option>
-                          <option>0</option>
-                          <option>1</option>
-                          <option>2</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="button" class="btn btn-secondary" onclick="calculateRoses()">Calculate!</button> 
-                    </div>
-                </div>
-            </form>
-        
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Red</th>
-                    <th scope="col">Yellow</th>
-                    <th scope="col">White</th>
-                    <th scope="col">Color</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>white</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>white</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>2</td>
-                    <td>blue</td>
-                </tr>
-
-                <tr>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>yellow</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>yellow</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>blue</td>
-                </tr>
-
-                <tr>
-                    <td>0</td>
-                    <td>2</td>
-                    <td>0</td>
-                    <td>yellow</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>yellow</td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>yellow</td>
-                </tr>
-                </tbody>
-            </table>
+        <div id="div_rose" class="d-block">
         </div>
-        <div id="table_tulip" class="d-none">
+
+        <div id="div_tulip" class="d-none">
             <form onsubmit="return calculateTulips()">
                 <div class="form-row">
                     <div class="col-sm-1"><p>Parent 1</p></div>
@@ -218,73 +90,36 @@
                 </div>
             </form>
 
-            <table class="table table-striped">
+            <table id="table_tulip" class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">R/Y/W</th>
                     <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>0 0 0</td>
-                    <td>white</td>
-                  </tr>
-                  <tr>
-                    <td>0 0 1</td>
-                    <td>white</td>
-                  </tr>
-                  <tr>
-                    <td>0 0 2</td>
-                    <td>white</td>
-                  </tr>
-    
-                  <tr>
-                    <td>0 1 0</td>
-                    <td>yellow</td>
-                  </tr>
-                  <tr>
-                    <td>0 1 1</td>
-                    <td>yellow</td>
-                  </tr>
-                  <tr>
-                    <td>0 1 2</td>
-                    <td>white</td>
-                  </tr>
-    
-                  <tr>
-                    <td>0 2 0</td>
-                    <td>yellow</td>
-                  </tr>
-                  <tr>
-                    <td>0 2 1</td>
-                    <td>yellow</td>
-                  </tr>
-                  <tr>
-                    <td>0 2 2</td>
-                    <td>yellow</td>
-                  </tr>
                 </tbody>
             </table>
-            </div>
+        </div>
         
-        <table id="table_pansy" class="table table-striped d-none">
-        </table>
+        <div id="div_pansy" class="d-block">
+        </div>
 
-        <table id="table_cosmos" class="table table-striped d-none">
-        </table>
+        <div id="div_cosmos" class="d-block">
+        </div>
 
-        <table id="table_lily" class="table table-striped d-none">
-        </table>
+        <div id="div_lily" class="d-block">
+        </div>
         
-        <table id="table_hyacinth" class="table table-striped d-none">
-        </table>
+        <div id="div_hyacinth" class="d-block">
+        </div>
 
-        <table id="table_windflower" class="table table-striped d-none">
-        </table>
+        <div id="div_windflower" class="d-block">
+        </div>
         
-        <table id="table_mum" class="table table-striped d-none">
-        </table>
+        <div id="div_mum" class="d-block">
+        </div>
 
     
     </div>

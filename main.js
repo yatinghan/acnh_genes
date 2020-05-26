@@ -39,54 +39,54 @@ var tulip_dict = {
 
 function selectFlower(type){
     // remove from the display class and add to hidden class 
-    document.getElementById("table_rose").classList.remove("d-block");
-    document.getElementById("table_rose").classList.add("d-none"); 
+    document.getElementById("div_rose").classList.remove("d-block");
+    document.getElementById("div_rose").classList.add("d-none"); 
 
-    document.getElementById("table_tulip").classList.remove("d-block");
-    document.getElementById("table_tulip").classList.add("d-none"); 
+    document.getElementById("div_tulip").classList.remove("d-block");
+    document.getElementById("div_tulip").classList.add("d-none"); 
 
-    document.getElementById("table_pansy").classList.remove("d-block");
-    document.getElementById("table_pansy").classList.add("d-none"); 
+    document.getElementById("div_pansy").classList.remove("d-block");
+    document.getElementById("div_pansy").classList.add("d-none"); 
 
-    document.getElementById("table_cosmos").classList.remove("d-block");
-    document.getElementById("table_cosmos").classList.add("d-none"); 
+    document.getElementById("div_cosmos").classList.remove("d-block");
+    document.getElementById("div_cosmos").classList.add("d-none"); 
 
-    document.getElementById("table_lily").classList.remove("d-block");
-    document.getElementById("table_lily").classList.add("d-none"); 
+    document.getElementById("div_lily").classList.remove("d-block");
+    document.getElementById("div_lily").classList.add("d-none"); 
 
-    document.getElementById("table_hyacinth").classList.remove("d-block");
-    document.getElementById("table_hyacinth").classList.add("d-none"); 
+    document.getElementById("div_hyacinth").classList.remove("d-block");
+    document.getElementById("div_hyacinth").classList.add("d-none"); 
 
-    document.getElementById("table_windflower").classList.remove("d-block");
-    document.getElementById("table_windflower").classList.add("d-none"); 
+    document.getElementById("div_windflower").classList.remove("d-block");
+    document.getElementById("div_windflower").classList.add("d-none"); 
 
-    document.getElementById("table_mum").classList.remove("d-block");
-    document.getElementById("table_mum").classList.add("d-none"); 
+    document.getElementById("div_mum").classList.remove("d-block");
+    document.getElementById("div_mum").classList.add("d-none"); 
 
 
     if (type == 'tulip'){
-        document.getElementById("table_tulip").classList.add("d-block");
+        document.getElementById("div_tulip").classList.add("d-block");
     }
     else if (type == 'pansy'){
-        document.getElementById("table_pansy").classList.add("d-block");
+        document.getElementById("div_pansy").classList.add("d-block");
     }
     else if (type == 'cosmos'){
-        document.getElementById("table_cosmos").classList.add("d-block");
+        document.getElementById("div_cosmos").classList.add("d-block");
     }
     else if (type == 'lily'){
-        document.getElementById("table_lily").classList.add("d-block");
+        document.getElementById("div_lily").classList.add("d-block");
     }
     else if (type == 'hyacinth'){
-        document.getElementById("table_hyacinth").classList.add("d-block");
+        document.getElementById("div_hyacinth").classList.add("d-block");
     }
     else if (type == 'windflower'){
-        document.getElementById("table_windflower").classList.add("d-block");
+        document.getElementById("div_windflower").classList.add("d-block");
     }
     else if (type == 'mum'){
-        document.getElementById("table_mum").classList.add("d-block");
+        document.getElementById("div_mum").classList.add("d-block");
     }
     else {
-        document.getElementById("table_rose").classList.add("d-block");
+        document.getElementById("div_rose").classList.add("d-block");
     }
 }
 
@@ -167,12 +167,28 @@ function calculateTulips() {
         }
     }
 
+    var table = document.getElementById("table_tulip");
     for (var key in d){
-        t = (key >> 4 & 3).toString() + "/" + (key >> 2 & 3).toString() + "/" + (key & 3).toString();
+        var r = key >> 4 & 3;
+        var y = key >> 2 & 3;
+        var w = key & 3;
+        r = (r == 3) ? 2 : r;
+        y = (y == 3) ? 2 : y;
+        w = (w == 3) ? 2 : w;
+        var t = r.toString() + "/" + y.toString() + "/" + w.toString();
         console.log(t, tulip_dict[key], (d[key]/cnt*100) + "%");
+        var newrow = table.insertRow();
+        var gene  = document.createTextNode(t);
+        var color = document.createTextNode(tulip_dict[key]);
+        var chance  = document.createTextNode((d[key]/cnt*100) + "%");
+        
+        var newcell = newrow.insertCell();
+        newcell.appendChild(color);
+        newcell = newrow.insertCell();
+        newcell.appendChild(gene);
+        newcell = newrow.insertCell();
+        newcell.appendChild(chance);
+
     }
-    // alert(shufflePair(gene1, gene2))
-    // alert(gene1.toString(2) + "; " + gene2.toString(2) + "; " + shufflePair(gene1, gene2))
-    // alert(gene1.toString(2) + "; " + gene2.toString(2));
     return false;
 }
