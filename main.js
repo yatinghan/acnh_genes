@@ -173,6 +173,6 @@ function calculateTulips() {
     }
     // alert(shufflePair(gene1, gene2))
     // alert(gene1.toString(2) + "; " + gene2.toString(2) + "; " + shufflePair(gene1, gene2))
-    //alert(gene1.toString(2) + "; " + gene2.toString(2));
+    // alert(gene1.toString(2) + "; " + gene2.toString(2));
     return false;
 }
