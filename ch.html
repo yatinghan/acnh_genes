@@ -12,8 +12,656 @@
     <div class="container">
         <h1>动森：子代花基因型计算器</h1>
         <p>参考资料: <a href="https://aiterusawato.github.io/satogu/acnh/flowers/genotypes.html">Satogu的动森花朵完全指南</a> </p>
-        English version: <a href="index.html">click here</a>
-    
+        <p>English version: <a href="index.html">click here</a></p>
+        <p><strong class="text-danger">友情提示：</strong>基因型可能有个别不准，如果发现请与我联系，谢谢！</p>
+        
+        <div class="p-3 mb-2 bg-danger text-white">
+            <h3>诚聘汉化、美工、小语种人才</h3>
+            <h3>薪酬可议，2机票/小时起</h3>
+        </div>
+        
+        <div class="btn-group" style="display: flex" role="group" aria-label="flower selection">
+            <button onclick="selectFlower('rose')" type="button" class="btn btn-secondary">玫瑰</button>
+            <button onclick="selectFlower('tulip')" type="button" class="btn btn-secondary">郁金香</button>
+            <button onclick="selectFlower('pansy')" type="button" class="btn btn-secondary">三色堇</button>
+            <button onclick="selectFlower('cosmos')" type="button" class="btn btn-secondary">波斯菊</button>
+            <button onclick="selectFlower('lily')" type="button" class="btn btn-secondary">百合</button>
+            <button onclick="selectFlower('hyacinth')" type="button" class="btn btn-secondary">风信子</button>
+            <button onclick="selectFlower('windflower')" type="button" class="btn btn-secondary">银莲花</button>
+            <button onclick="selectFlower('mum')" type="button" class="btn btn-secondary">菊花</button>
+        </div>
+        
+        <!-- rose  -->
+        <div id="div_rose" class="d-block">
+            <form onsubmit="return calculateRoses()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>玫瑰1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="roseOpacity1" class="form-control">
+                          <option value="" disabled selected>Shade</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>玫瑰2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="roseOpacity2" class="form-control">
+                          <option value="" disabled selected>Shade</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_rose" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">S/R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- rose code ends -->
+
+        <!-- tulip -->
+        <div id="div_tulip" class="d-none">
+            <form onsubmit="return calculateTulips()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>郁金香1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="tulipRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="tulipYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="tulipWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>郁金香2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="tulipRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="tulipYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="tulipWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_tulip" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- tulip code ends -->
+        
+        <!-- pansy  -->
+        <div id="div_pansy" class="d-none">
+            <form onsubmit="return calculatePansies()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>三色堇1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="pansyRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="pansyYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="pansyWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>三色堇2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="pansyRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="pansyYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="pansyWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_pansy" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- pansy code ends  -->
+
+        <!-- cosmos  -->
+        <div id="div_cosmos" class="d-none">
+            <form onsubmit="return calculateCosmoses()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>波斯菊1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>波斯菊2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_cosmos" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- cosmos code ends  -->
+
+        <!-- lily  -->
+        <div id="div_lily" class="d-none">
+            <form onsubmit="return calculateLilies()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>百合1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="lilyRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="lilyYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="lilyWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>百合2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="lilyRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="lilyYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="lilyWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_lily" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- lily code ends  -->
+        
+        <!-- hyacinth  -->
+        <div id="div_hyacinth" class="d-none">
+            <form onsubmit="return calculateHyacinths()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>风信子1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>风信子2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_hyacinth" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- hyacinth code ends  -->
+
+        <!-- windflower  -->
+        <div id="div_windflower" class="d-none">
+            <form onsubmit="return calculateWindflowers()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>银莲花1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>银莲花2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_windflower" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- windflower code ends  -->
+        
+        <!-- mum  -->
+        <div id="div_mum" class="d-none">
+            <form onsubmit="return calculateMums()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>菊花1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="mumRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="mumYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="mumWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>菊花2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="mumRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="mumYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="mumWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_mum" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- mum code ends   -->
     
     </div>
 

@@ -12,8 +12,8 @@
     <div class="container">
         <h1>ACNH Breeding Chances Calculator</h1>
         <p>Reference: <a href="https://aiterusawato.github.io/satogu/acnh/flowers/genotypes.html">Satogu's ACNH Flower Guide</a> </p>
-        <p>中文版（并没有）: <a href="ch.html">点击这里</a> </p>
-        <p>Update: Tulip prediction is working. </p>
+        <p>中文版: <a href="ch.html">点击这里</a> </p>
+        <p><strong class="text-danger">Warning</strong>: I entered the colors manually so there might be errors. Please kindly let me know. </p>
         <div class="btn-group" style="display: flex" role="group" aria-label="flower selection">
             <button onclick="selectFlower('rose')" type="button" class="btn btn-secondary">Rose</button>
             <button onclick="selectFlower('tulip')" type="button" class="btn btn-secondary">Tulip</button>
@@ -25,14 +25,105 @@
             <button onclick="selectFlower('mum')" type="button" class="btn btn-secondary">Mum</button>
         </div>
         
+        <!-- rose  -->
         <div id="div_rose" class="d-block">
-        </div>
+            <form onsubmit="return calculateRoses()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Rose 1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="roseOpacity1" class="form-control">
+                          <option value="" disabled selected>Shade</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Rose 2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="roseOpacity2" class="form-control">
+                          <option value="" disabled selected>Shade</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="roseWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
 
+            <table id="table_rose" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">S/R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- rose code ends -->
+
+        <!-- tulip -->
         <div id="div_tulip" class="d-none">
             <form onsubmit="return calculateTulips()">
                 <div class="form-row">
-                    <div class="col-sm-1"><p>Parent 1</p></div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2"><p>Tulip 1</p></div>
+                    <div class="col-sm-2">
                         <select required id="tulipRed1" class="form-control">
                           <option value="" disabled selected>Red</option>
                           <option>0</option>
@@ -40,7 +131,7 @@
                           <option>2</option>
                         </select>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <select required id="tulipYellow1" class="form-control">
                           <option value="" disabled selected>Yellow</option>
                           <option >0</option>
@@ -48,7 +139,7 @@
                           <option>2</option>
                         </select>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <select required id="tulipWhite1" class="form-control">
                           <option value="" disabled selected>White</option>
                           <option>0</option>
@@ -59,8 +150,8 @@
                 </div>
                 
                 <div class="form-row">
-                    <div class="col-sm-1"><p>Parent 2</p></div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2"><p>Tulip 2</p></div>
+                    <div class="col-sm-2">
                         <select required id="tulipRed2" class="form-control">
                           <option value="" disabled selected>Red</option>
                           <option>0</option>
@@ -68,7 +159,7 @@
                           <option>2</option>
                         </select>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <select required id="tulipYellow2" class="form-control">
                           <option value="" disabled selected>Yellow</option>
                           <option >0</option>
@@ -76,7 +167,7 @@
                           <option>2</option>
                         </select>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <select required id="tulipWhite2" class="form-control">
                           <option value="" disabled selected>White</option>
                           <option>0</option>
@@ -102,26 +193,469 @@
                 </tbody>
             </table>
         </div>
+        <!-- tulip code ends -->
         
-        <div id="div_pansy" class="d-block">
-        </div>
+        <!-- pansy  -->
+        <div id="div_pansy" class="d-none">
+            <form onsubmit="return calculatePansies()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Pansy 1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="pansyRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="pansyYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="pansyWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Pansy 2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="pansyRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="pansyYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="pansyWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
 
-        <div id="div_cosmos" class="d-block">
+            <table id="table_pansy" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
+        <!-- pansy code ends  -->
 
-        <div id="div_lily" class="d-block">
+        <!-- cosmos  -->
+        <div id="div_cosmos" class="d-none">
+            <form onsubmit="return calculateCosmoses()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Cosmos 1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Cosmos 2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="cosmosWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_cosmos" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
+        <!-- cosmos code ends  -->
+
+        <!-- lily  -->
+        <div id="div_lily" class="d-none">
+            <form onsubmit="return calculateLilies()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Lily 1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="lilyRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="lilyYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="lilyWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Lily 2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="lilyRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="lilyYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="lilyWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_lily" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- lily code ends  -->
         
-        <div id="div_hyacinth" class="d-block">
-        </div>
+        <!-- hyacinth  -->
+        <div id="div_hyacinth" class="d-none">
+            <form onsubmit="return calculateHyacinths()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Hyacinth 1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Hyacinth 2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="hyacinthWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
 
-        <div id="div_windflower" class="d-block">
+            <table id="table_hyacinth" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
+        <!-- hyacinth code ends  -->
+
+        <!-- windflower  -->
+        <div id="div_windflower" class="d-none">
+            <form onsubmit="return calculateWindflowers()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Windflower 1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Windflower 2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="windflowerWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
+
+            <table id="table_windflower" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- windflower code ends  -->
         
-        <div id="div_mum" class="d-block">
-        </div>
+        <!-- mum  -->
+        <div id="div_mum" class="d-none">
+            <form onsubmit="return calculateMums()">
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Mum 1</p></div>
+                    <div class="col-sm-2">
+                        <select required id="mumRed1" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="mumYellow1" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="mumWhite1" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-sm-2"><p>Mum 2</p></div>
+                    <div class="col-sm-2">
+                        <select required id="mumRed2" class="form-control">
+                          <option value="" disabled selected>Red</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="mumYellow2" class="form-control">
+                          <option value="" disabled selected>Yellow</option>
+                          <option >0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <select required id="mumWhite2" class="form-control">
+                          <option value="" disabled selected>White</option>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-secondary">Calculate!</button> 
+                    </div>
+                </div>
+            </form>
 
-    
+            <table id="table_mum" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Color</th>
+                    <th scope="col">R/Y/W</th>
+                    <th scope="col">Chances</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- mum code ends   -->
     </div>
     
     <!-- prediction functions -->
